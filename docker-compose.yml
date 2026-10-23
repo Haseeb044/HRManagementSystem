@@ -16,6 +16,7 @@ services:
       retries: 10
 
   app:
+    image: haseeb0440/hr-app:latest
     build:
       context: .
       target: app
@@ -26,6 +27,7 @@ services:
         condition: service_healthy
 
   web:
+    image: haseeb0440/hr-web:latest
     build:
       context: .
       target: web
