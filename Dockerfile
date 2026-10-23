@@ -13,7 +13,8 @@ WORKDIR /var/www/html
 COPY . .
 COPY --from=frontend /app/public/build public/build
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
-RUN chown -R www-data:www-data storage bootstrap/cache
+RUN mkdir -p storage/logs storage/framework/cache/data storage/framework/sessions storage/framework/views bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache
 
 FROM nginx:alpine AS web
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
